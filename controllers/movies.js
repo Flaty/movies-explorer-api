@@ -4,9 +4,12 @@ const BadRequest = require('../errors/bad-request-error');
 const Forbidden = require('../errors/forbidden-error');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => {
-      res.send(movies);
+      if (!movies) {
+        throw new NotFoundError('Фильмы не найдены');
+      }
+      res.send({ data: movies });
     })
     .catch(next);
 };

@@ -34,6 +34,17 @@ const createUser = (req, res, next) => {
     });
 };
 
+exports.signOut = (req, res) => {
+  res
+    .cookie('jwt', '', {
+      httpOnly: true,
+      expires: new Date(Date.now() - 3600000),
+      sameSite: 'strict',
+    })
+    .status(200)
+    .send({ message: 'Вы успешно вышли из системы' });
+};
+
 const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
@@ -59,7 +70,7 @@ const getCurrentUser = (req, res, next) => {
     })
     .catch((e) => {
       if (e.name === 'CastError') {
-        next(new BadRequest('Запрашиваемый пользователь не найден'));
+        next(new BadRequest('Невалидный _id пользователя'));
       } else {
         next(e);
       }
