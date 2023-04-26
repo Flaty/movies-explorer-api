@@ -7,7 +7,7 @@ const getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
     .then((movies) => {
       if (!movies) {
-        throw new NotFoundError('Фильмы не найдены');
+        throw new NotFound('Фильмы не найдены');
       }
       res.send({ data: movies });
     })

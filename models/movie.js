@@ -50,7 +50,7 @@ const movieSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-  }, 
+  },
   movieId: {
     type: Number,
     required: true,
@@ -58,7 +58,7 @@ const movieSchema = new mongoose.Schema({
   nameRU: {
     type: String,
     required: true,
-  }, 
+  },
   nameEN: {
     type: String,
     required: true,
