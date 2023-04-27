@@ -34,7 +34,7 @@ const createUser = (req, res, next) => {
     });
 };
 
-exports.signOut = (req, res) => {
+const signOut = (req, res) => {
   res
     .cookie('jwt', '', {
       httpOnly: true,
@@ -105,5 +105,5 @@ const updateUser = (req, res, next) => {
 };
 
 module.exports = {
-  createUser, getCurrentUser, updateUser, login,
+  createUser, getCurrentUser, updateUser, login, signOut
 };
